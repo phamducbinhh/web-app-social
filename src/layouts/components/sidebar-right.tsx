@@ -1,3 +1,5 @@
+"use client";
+
 import { _avatarData as fakeAvatarData } from "@/_mocks/_avatar";
 import { _trendingData as fakeTrending } from "@/_mocks/_trending";
 import { AvtGroupExpand } from "@/components/avatar";
@@ -16,7 +18,7 @@ export default function SidebarRight() {
     setActiveTab(key);
   };
 
-  const isFollowingPage = true;
+  const isFollowingPage = false;
 
   return (
     <section className="bg-background-secondary fixed top-0 right-0 min-h-full flex flex-col p-3 gap-3 w-85 2xl:w-120">

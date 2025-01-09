@@ -39,6 +39,8 @@ export default function TrendingTopicCard({
       <Image
         src={thumbnail}
         alt="trending thumbnail"
+        width={112}
+        height={96}
         className="min-w-[7rem] max-h-[6rem] rounded-[0.5rem] object-cover row-span-2 items-center"
       />
       <div className="flex flex-col gap-3">
@@ -53,16 +55,22 @@ export default function TrendingTopicCard({
             <Image
               src="https://i.pinimg.com/originals/d3/6f/ef/d36fef4f4885354afcfd3753dee95741.jpg"
               alt="Avatar 3"
+              width={32}
+              height={32}
               className="border-[#2e2e2e] border-[0.0625rem] size-[1.25rem] object-cover rounded-full"
             />
             <Image
               src="https://i.pinimg.com/originals/4a/7e/74/4a7e7438c14c2807c81cba4a99e4cec2.jpg"
               alt="Avatar 5"
+              width={32}
+              height={32}
               className="border-[#2e2e2e] border-[0.0625rem] size-[1.25rem] ml-[-0.275rem] object-cover rounded-full"
             />
             <Image
               src="https://i.pinimg.com/originals/14/ab/f1/14abf1f58ea5686cf9e24ec22a099892.jpg"
               alt="Avatar 9"
+              width={32}
+              height={32}
               className="border-[#2e2e2e] border-[0.0625rem] size-[1.25rem] ml-[-0.275rem] object-cover rounded-full"
             />
           </div>

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from '@/components/button';
-import { Typography } from '@/components/typography';
-import { cn } from '@/lib/utils';
-import { AddIcon, CheckIcon } from '@/components/icons';
-import Image from 'next/image';
+import { Button } from "@/components/button";
+import { AddIcon, CheckIcon } from "@/components/icons";
+import { Typography } from "@/components/typography";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 //-------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ interface ProfileCardProps {
   userName: string;
   userHandle: string;
   src: string;
-  types?: 'follower' | 'following';
+  types?: "follower" | "following";
 }
 
 export default function ProfileCard({
@@ -25,8 +25,8 @@ export default function ProfileCard({
   return (
     <div
       className={cn(
-        'bg-neutral2-2 rounded-[1.25rem] p-3 flex flex-col justify-center gap-3 hover:bg-neutral2-5 focus:border-[3px] focus:border-neutral2-10',
-        className,
+        "bg-neutral2-2 rounded-[1.25rem] p-3 flex flex-col justify-center gap-3 hover:bg-neutral2-5 focus:border-[3px] focus:border-neutral2-10",
+        className
       )}
     >
       <div className="profile-info flex items-start gap-3">
@@ -36,6 +36,8 @@ export default function ProfileCard({
           <Image
             src={src}
             alt="avatar"
+            width={44}
+            height={44}
             className="rounded-full min-w-[44px] size-[44px]"
           />
         </div>
@@ -49,7 +51,7 @@ export default function ProfileCard({
         </div>
 
         <Button
-          child={types === 'follower' ? <AddIcon /> : <CheckIcon />}
+          child={types === "follower" ? <AddIcon /> : <CheckIcon />}
           className="hidden md:flex rounded-full p-[10px] size-[40px]"
         />
       </div>

@@ -1,13 +1,17 @@
-import Sidebar from "@/layouts/components/sidebar";
+import SidebarRight from "@/layouts/components/sidebar-right";
+import MainAppLayout from "@/layouts/main-layout";
+import SidebySideLayout from "@/layouts/sbs-layout";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div id="" className="h-fit block md:flex">
-      <Sidebar />
-      <main className="flex-1 flex-grow w-full min-h-fit overflow-hidden">
+    <MainAppLayout>
+      <SidebySideLayout sideComponent={<SidebarRight />}>
         {children}
-      </main>
-    </div>
+      </SidebySideLayout>
+    </MainAppLayout>
   );
 }
-
