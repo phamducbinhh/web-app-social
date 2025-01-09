@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
 export default function ButtonUploadImg() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -12,7 +12,7 @@ export default function ButtonUploadImg() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      console.log('Selected file:', file);
+      console.log("Selected file:", file);
     }
   };
 

@@ -1,5 +1,4 @@
 import AppProviders from "@/providers/app-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
 import "@/styles/global.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -29,9 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AppProviders>
-          <ThemeProvider>{children}</ThemeProvider>
-        </AppProviders>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

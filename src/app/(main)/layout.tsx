@@ -1,6 +1,6 @@
 import Sidebar from "@/layouts/components/sidebar";
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <div id="" className="h-fit block md:flex">
       <Sidebar />
@@ -10,3 +10,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
