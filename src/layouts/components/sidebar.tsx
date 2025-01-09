@@ -41,7 +41,8 @@ const Sidebar: React.FC = () => {
         setIsExpanded(!isExpanded);
       }
     }
-  }, [breakpoint, isExpanded]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [breakpoint]);
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
