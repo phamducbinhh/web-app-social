@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib";
+import Image from "next/image";
 import React from "react";
 import { OfflineIcon, OnlineIcon } from "../icons";
 
@@ -40,9 +41,11 @@ const Avatar: React.FC<AvatarProps> = ({
     {isOnline !== undefined && (
       <OnlineStatus isOnline={isOnline} className={onlineClassName} />
     )}
-    <img
+    <Image
       src={src}
       alt={alt}
+      width={44}
+      height={44}
       loading="lazy"
       className={cn(
         "rounded-full min-w-[2.75rem] size-[2.75rem] object-cover",

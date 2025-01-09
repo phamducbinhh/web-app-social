@@ -3,6 +3,7 @@ import { Button } from '@/components/button';
 import { Typography } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { AddIcon, CheckIcon } from '@/components/icons';
+import Image from 'next/image';
 
 //-------------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ export default function ProfileCard({
         <div id="avatar-user" className="relative">
           <div className="absolute size-[1.25rem] -left-1 -top-1 rounded-full bg-[#F8F8F8] border-[3px] border-[#323232]"></div>
 
-          <img
+          <Image
             src={src}
             alt="avatar"
             className="rounded-full min-w-[44px] size-[44px]"

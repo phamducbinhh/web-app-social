@@ -1,4 +1,5 @@
-import Sidebar from "@/layouts/components/sidebar";
+import AppProviders from "@/providers/app-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import "@/styles/global.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -28,12 +29,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div id="" className="h-fit block md:flex">
-          <Sidebar />
-          <main className="flex-1 flex-grow w-full min-h-fit overflow-hidden">
-            {children}
-          </main>
-        </div>
+        <AppProviders>
+          <ThemeProvider>{children}</ThemeProvider>
+        </AppProviders>
       </body>
     </html>
   );
