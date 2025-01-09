@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 //--------------------------------------------------------------------------------------------
 
@@ -33,10 +33,10 @@ export default function SplashScreen({
             scale: [1.6, 1, 1, 1.6, 1.6],
             rotate: [270, 0, 0, 270, 270],
             opacity: [0.25, 1, 1, 1, 0.25],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+            borderRadius: ["25%", "25%", "50%", "50%", "25%"],
           }}
           transition={{
-            ease: 'linear',
+            ease: "linear",
             duration: 3.2,
             repeat: Infinity,
           }}
@@ -48,10 +48,10 @@ export default function SplashScreen({
             scale: [1, 1.2, 1.2, 1, 1],
             rotate: [0, 270, 270, 0, 0],
             opacity: [1, 0.25, 0.25, 0.25, 1],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+            borderRadius: ["25%", "25%", "50%", "50%", "25%"],
           }}
           transition={{
-            ease: 'linear',
+            ease: "linear",
             duration: 3.2,
             repeat: Infinity,
           }}

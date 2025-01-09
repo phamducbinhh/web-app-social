@@ -7,6 +7,7 @@ import { Typography } from "@/components/typography";
 import styled from "@/styles/auth.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Input } from "../components";
 
@@ -15,6 +16,7 @@ import { Input } from "../components";
 export default function LoginView() {
   const [email, setEmail] = React.useState("edu@200lab.io");
   const [password, setPassword] = React.useState("edu@200lab");
+  const router = useRouter();
 
   const isValidEmail = (email: any) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,6 +28,7 @@ export default function LoginView() {
   const handleLogin = (e: any) => {
     e.preventDefault();
     if (email === "edu@200lab.io" && password === "edu@200lab") {
+      router.push("/");
     } else {
       alert("Thông tin đăng nhập không chính xác");
     }
