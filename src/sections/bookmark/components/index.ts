@@ -1,2 +1,1 @@
-export { default as BookmarkFolder } from './bookmark-folder';
-export { default as BookmarkItems } from './bookmark-items';
+export { default as BookmarkFolder } from "./bookmark-folder";

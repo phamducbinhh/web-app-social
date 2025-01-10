@@ -1,28 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { Typography } from "@/components/typography";
 import useBreakPoint from "@/hooks/use-breakpoint";
-import React from "react";
-import { BookmarkFolder } from "../components";
-
-//----------------------------------------------------------------------
+import Image from "next/image";
 
 export default function BookmarkView() {
   const { breakpoint } = useBreakPoint();
-  const [showDetailOnly, setShowDetailOnly] = React.useState(false);
 
-  const isMobile = breakpoint === "sm";
+  const hideConsolidation = breakpoint === "sm" || breakpoint === "md";
 
-  const handleConversationClick = (id: any) => {
-    console.log("🚀 ~ handleConversationClick ~ id:", id);
-    if (isMobile) {
-      setShowDetailOnly(true);
-    }
-  };
   return (
-    <section className="w-full min-h-screen flex flex-col justify-start transition-all duration-[0.5s] lg:flex-row lg:items-start">
-      {!isMobile || !showDetailOnly ? (
-        <BookmarkFolder onConversationClick={handleConversationClick} />
+    <>
+      {!hideConsolidation ? (
+        <section className="bg-surface h-screen w-full grow flex flex-col justify-center items-center gap-3 py-[1.75rem]">
+          <Image
+            width={100}
+            height={100}
+            src="/svg/ai_data_consolidation.svg"
+            alt="no-followers"
+            className="w-fit object-contain mb-[1.75rem]"
+          />
+          <Typography level="title" className="text-primary opacity-60">
+            Select Folder
+          </Typography>
+          <Typography level="base2r" className="text-secondary opacity-50">
+            To start viewing bookmarks
+          </Typography>
+        </section>
       ) : null}
-    </section>
+    </>
   );
 }

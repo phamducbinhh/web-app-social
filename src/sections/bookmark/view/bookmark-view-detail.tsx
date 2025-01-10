@@ -1,4 +1,5 @@
 /* eslint-disable react/no-children-prop */
+"use client";
 import { _media as fakeMedia } from "@/_mocks/_media";
 import { _posts as fakePosts } from "@/_mocks/_posts";
 import { CircleButton } from "@/components/button";
@@ -6,7 +7,7 @@ import { ArrowBackIcon, MoreIcon } from "@/components/icons";
 import { SearchBar } from "@/components/search";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
 import React from "react";
-import ListItem from "./list-items";
+import ListItem from "../components/list-items";
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -15,11 +16,11 @@ const _nav = [
   { key: "2", label: "Media" },
 ];
 
-export default function BookmarkItems() {
+export default function BookmarkItems({ id }: { id: string }) {
   const [selectedTab, setSelectedTab] = React.useState("1");
 
-  const filteredPosts = fakePosts.filter((post) => post.cateId === '1');
-  const filteredMedia = fakeMedia.filter((media) => media.cateId === '1');
+  const filteredPosts = fakePosts.filter((post) => post.cateId === id);
+  const filteredMedia = fakeMedia.filter((media) => media.cateId === id);
 
   return (
     <section className="block md:hidden w-full h-full md:h-screen flex-col p-3 md:pb-0 bg-surface lg:flex">
