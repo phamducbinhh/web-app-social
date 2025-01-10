@@ -13,6 +13,7 @@ import {
 import { MoreOptions } from "@/components/more-options";
 import { Typography } from "@/components/typography";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { ReactItem } from "./react-item";
 
@@ -72,14 +73,16 @@ export default function Post({ post }: any) {
           />
 
           {post.content?.image && (
-            <Image
-              src={post.content.image}
-              width={900}
-              height={900}
-              alt="post-image"
-              loading="lazy"
-              className="max-h-[20rem] md:max-h-[22.5rem] w-full rounded-[1.5rem] object-cover"
-            />
+            <Link href={`/posts/${post.id}`}>
+              <Image
+                src={post.content.image}
+                width={900}
+                height={900}
+                alt="post-image"
+                loading="lazy"
+                className="max-h-[20rem] md:max-h-[22.5rem] w-full rounded-[1.5rem] object-cover"
+              />
+            </Link>
           )}
         </div>
       </div>

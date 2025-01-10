@@ -1,17 +1,18 @@
-import { Avatar } from '@/components/avatar';
+"use client";
+import { Avatar } from "@/components/avatar";
 import {
   Button,
   EmojiButton,
   GifButton,
   ImageButton,
   TagButton,
-} from '@/components/button';
-import { Typography } from '@/components/typography';
-import { useState } from 'react';
+} from "@/components/button";
+import { Typography } from "@/components/typography";
+import { useState } from "react";
 
 //-------------------------------------------------------------------------
 interface PostContentProps {
-  usedBy: 'post' | 'reply';
+  usedBy: "post" | "reply";
 }
 
 export default function ComposerInput({ usedBy }: PostContentProps) {
@@ -19,7 +20,9 @@ export default function ComposerInput({ usedBy }: PostContentProps) {
 
   return (
     <div
-      className={`w-full flex ${isInputFocused ? 'flex-col bg-neutral3-70' : 'flex-row bg-neutral2-2'} gap-3 items-center justify-between p-3 bottom-0  rounded-[1.25rem]`}
+      className={`w-full flex ${
+        isInputFocused ? "flex-col bg-neutral3-70" : "flex-row bg-neutral2-2"
+      } gap-3 items-center justify-between p-3 bottom-0  rounded-[1.25rem]`}
     >
       <div
         id="reply-content"
@@ -33,7 +36,7 @@ export default function ComposerInput({ usedBy }: PostContentProps) {
         <input
           type="text"
           placeholder={
-            usedBy === 'post' ? 'Start a post...' : 'Post your reply...'
+            usedBy === "post" ? "Start a post..." : "Post your reply..."
           }
           id="input-reply"
           className="!bg-transparent text-tertiary placeholder:text-tertiary grow opacity-50 focus:outline-none focus:bg-transparent focus:opacity-100"
@@ -43,7 +46,9 @@ export default function ComposerInput({ usedBy }: PostContentProps) {
 
       <div
         id="post-action"
-        className={`${isInputFocused ? 'w-full' : 'w-fit'}  flex items-center justify-between`}
+        className={`${
+          isInputFocused ? "w-full" : "w-fit"
+        }  flex items-center justify-between`}
       >
         {/* Chỉ hiển thị tool-reply khi input được focus */}
         {isInputFocused && (
@@ -61,7 +66,7 @@ export default function ComposerInput({ usedBy }: PostContentProps) {
           type="submit"
           child={
             <Typography className="text-secondary" level="base2sm">
-              {usedBy === 'post' ? 'Post' : 'Reply'}
+              {usedBy === "post" ? "Post" : "Reply"}
             </Typography>
           }
         />
