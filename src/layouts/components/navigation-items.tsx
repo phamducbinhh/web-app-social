@@ -30,7 +30,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     title: "Profile",
     Icon: <Profile />,
-    path: "/users/1",
+    path: "/profile",
   },
   {
     title: "Explore",
