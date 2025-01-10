@@ -1,5 +1,9 @@
 import PostDetailView from "@/sections/post-detail/view/post-detail-view";
+import { use } from "react";
 
-export default function PostDetail({ params }: { params: { id: string } }) {
-  return <PostDetailView id={params.id} />;
+type Params = Promise<{ id: string }>;
+export default function PostDetail(props: { params: Params }) {
+  const params = use(props.params);
+  const id = params.id;
+  return <PostDetailView id={id} />;
 }

@@ -6,9 +6,7 @@ import { ArrowBackIcon, MoreIcon } from "@/components/icons";
 //-------------------------------------------------------------------------
 
 export default function Head() {
-  const handleBack = () => {
-    console.log("Back");
-  };
+  const handleBack = () => {};
 
   return (
     <section className="w-full absolute flex justify-between items-center gap-2 p-3 z-10">

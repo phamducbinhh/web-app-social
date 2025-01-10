@@ -9,6 +9,7 @@ import {
   ShareIcon,
 } from "@/components/icons";
 import { Typography } from "@/components/typography";
+import Link from "next/link";
 
 //-------------------------------------------------------------------------
 
@@ -74,9 +75,11 @@ export default function UserInfo({ user }: UserInfoProps) {
               className="text-primary flex items-center gap-2"
             >
               {user.followers}
-              <Typography level="base2r" className="text-tertiary">
-                followers
-              </Typography>
+              <Link href={`/profile/${user.id}/followers`}>
+                <Typography level="base2r" className="text-tertiary">
+                  followers
+                </Typography>
+              </Link>
             </Typography>
           </div>
         </div>

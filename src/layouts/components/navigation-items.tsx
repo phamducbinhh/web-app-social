@@ -28,7 +28,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     path: "/bookmarks",
   },
   {
-    title: "Profile",
+    title: "My Profile",
     Icon: <Profile />,
     path: "/profile",
   },

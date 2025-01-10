@@ -1,4 +1,4 @@
-import { IImage } from '@interfaces/image';
+import { IImage } from '@/interfaces/image';
 import { AvatarData } from './_avatar';
 
 export interface IExploreCard {
