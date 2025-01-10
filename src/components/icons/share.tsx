@@ -1,4 +1,6 @@
-import { Icon } from '@interfaces/icon';
+"use client";
+
+import { Icon } from '@/interfaces/icon';
 import React from 'react';
 
 //--------------------------------------------------------------------------

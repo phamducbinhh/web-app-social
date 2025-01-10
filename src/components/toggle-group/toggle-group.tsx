@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import ToggleItem from './toggle-item';
 import { cn } from '@/lib/utils';

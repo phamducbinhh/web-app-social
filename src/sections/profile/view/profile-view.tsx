@@ -1,4 +1,3 @@
-"use client";
 import { _posts as fakePosts } from "@/_mocks/_posts";
 import { _user as fakeUsers } from "@/_mocks/_user";
 import { Newfeed } from "@/components/newfeed";

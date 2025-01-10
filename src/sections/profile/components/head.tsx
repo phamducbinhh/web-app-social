@@ -1,4 +1,5 @@
 /* eslint-disable react/no-children-prop */
+"use client";
 import { CircleButton } from "@/components/button";
 import { ArrowBackIcon, MoreIcon } from "@/components/icons";
 
