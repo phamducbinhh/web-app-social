@@ -12,7 +12,7 @@ interface ExploreCardProps {
 export default function ExploreCard({ explore }: ExploreCardProps) {
   return (
     <Link
-      href={`/explore/${explore.id}`}
+      href={`/posts/${explore.id}`}
       className="group w-full min-w-[17.5rem] flex flex-col rounded-[20px] p-3 bg-neutral2-2 gap-3 md:items-start md:justify-center md:hover:bg-[#f8f8f81a]"
     >
       <Image
