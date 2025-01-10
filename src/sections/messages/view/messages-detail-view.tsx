@@ -56,8 +56,8 @@ const _conversations = [
   },
 ];
 
-export default function ConversationDetail() {
-  const conversation = _conversations.find((item) => item.id === Number(1));
+export default function ConversationDetail({ id }: { id: string }) {
+  const conversation = _conversations.find((item) => item.id === Number(id));
 
   if (!conversation) return null;
 

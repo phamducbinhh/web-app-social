@@ -3,7 +3,7 @@
 "use client";
 import useBreakPoint from "@/hooks/use-breakpoint";
 import { ConversationSidebar } from "@/sections/messages/components";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import React from "react";
 
 export default function MessagesLayout({

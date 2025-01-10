@@ -1,5 +1,6 @@
-import Avatar from '@/components/avatar/avatar';
-import { Typography } from '@/components/typography';
+import Avatar from "@/components/avatar/avatar";
+import { Typography } from "@/components/typography";
+import Image from "next/image";
 
 //----------------------------------------------------------------------
 
@@ -38,9 +39,12 @@ export default function MessageItem({ message }: IMessageItemProps) {
           {message.content}
         </Typography>
         {message.imageUrl && (
-          <img
+          <Image
             src={message.imageUrl}
+            width={1280}
+            height={1280}
             loading="lazy"
+            alt="image-message"
             className="max-h-[22.5rem] w-full md: rounded-[1.5rem] object-cover"
           />
         )}
