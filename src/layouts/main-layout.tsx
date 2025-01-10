@@ -6,7 +6,7 @@ export default function MainAppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div id="" className="h-fit block md:flex">
+    <div id="app" className="h-fit block md:flex">
       <Sidebar />
       <main className="flex-1 flex-grow w-full min-h-fit overflow-hidden">
         {children}
