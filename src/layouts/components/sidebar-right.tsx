@@ -21,7 +21,7 @@ export default function SidebarRight() {
   const isFollowingPage = false;
 
   return (
-    <section className="bg-background-secondary fixed top-0 right-0 min-h-full flex flex-col p-3 gap-3 w-85 2xl:w-120">
+    <section className="fixed top-0 right-0 min-h-full flex flex-col p-3 gap-3 w-85 2xl:w-120 bg-surface-3">
       {!isFollowingPage && (
         <ToggleGroup
           className="w-full p-1 flex justify-between items-center bg-neutral3-60 rounded-[6.25rem]"
