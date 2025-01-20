@@ -3,21 +3,15 @@
 import { _avatarData as fakeAvatar } from "@/_mocks/_avatar";
 import { AvatarGroup } from "@/components/avatar";
 import { Button, CircleButton } from "@/components/button";
+import { FormField } from "@/components/formField";
 import { Typography } from "@/components/typography";
 import styled from "@/styles/auth.module.css";
 import { TLoginAuth } from "@/types/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Controller,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { Input } from "../components";
 
 //----------------------------------------------------------------------
 
@@ -29,49 +23,10 @@ const schema = yup.object({
     .required("Password is required"),
 });
 
-const EmailField = () => {
-  const { control } = useFormContext();
-  return (
-    <Controller
-      name="email"
-      control={control}
-      render={({ field, fieldState: { error } }) => (
-        <div>
-          <Input {...field} type="email" placeholder="Email" />
-          {error && (
-            <Typography level="captionr" className="text-red-500">
-              {error.message}
-            </Typography>
-          )}
-        </div>
-      )}
-    />
-  );
-};
-
-const PasswordField = () => {
-  const { control } = useFormContext();
-  return (
-    <Controller
-      name="password"
-      control={control}
-      render={({ field, fieldState: { error } }) => (
-        <div>
-          <Input {...field} type="password" placeholder="Password" />
-          {error && (
-            <Typography level="captionr" className="text-red-500">
-              {error.message}
-            </Typography>
-          )}
-        </div>
-      )}
-    />
-  );
-};
-
 export default function LoginView() {
   const methods = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -104,8 +59,12 @@ export default function LoginView() {
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-[0.875rem] mb-[1.5rem]">
-                <EmailField />
-                <PasswordField />
+                <FormField name="email" type="email" placeholder="Email" />
+                <FormField
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                />
               </div>
 
               <div className="flex flex-col gap-3">
