@@ -35,7 +35,6 @@ export class ApiClient {
     this.prefix = prefix;
     this.headers = {
       Accept: "application/json",
-      lang: "vi",
     };
   }
 
@@ -113,11 +112,7 @@ export class ApiClient {
       const normalizedPath = normalizePath(path);
 
       if (
-        [
-          "auth/login",
-          "auth/register",
-          "auth/logout",
-        ].includes(normalizedPath)
+        ["auth/login", "auth/register", "auth/logout"].includes(normalizedPath)
       ) {
         return response;
       }

@@ -5,33 +5,81 @@ import { AvatarGroup } from "@/components/avatar";
 import { Button, CircleButton } from "@/components/button";
 import { Typography } from "@/components/typography";
 import styled from "@/styles/auth.module.css";
+import { TLoginAuth } from "@/types/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
+import * as yup from "yup";
 import { Input } from "../components";
 
 //----------------------------------------------------------------------
 
+const schema = yup.object({
+  email: yup.string().email("Email is invalid").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
+const EmailField = () => {
+  const { control } = useFormContext();
+  return (
+    <Controller
+      name="email"
+      control={control}
+      render={({ field, fieldState: { error } }) => (
+        <div>
+          <Input {...field} type="email" placeholder="Email" />
+          {error && (
+            <Typography level="captionr" className="text-red-500">
+              {error.message}
+            </Typography>
+          )}
+        </div>
+      )}
+    />
+  );
+};
+
+const PasswordField = () => {
+  const { control } = useFormContext();
+  return (
+    <Controller
+      name="password"
+      control={control}
+      render={({ field, fieldState: { error } }) => (
+        <div>
+          <Input {...field} type="password" placeholder="Password" />
+          {error && (
+            <Typography level="captionr" className="text-red-500">
+              {error.message}
+            </Typography>
+          )}
+        </div>
+      )}
+    />
+  );
+};
+
 export default function LoginView() {
-  const [email, setEmail] = React.useState("edu@200lab.io");
-  const [password, setPassword] = React.useState("edu@200lab");
-  const router = useRouter();
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const isValidEmail = (email: any) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isBtnEnable = password !== "" && isValidEmail(email);
-
-  const handleLogin = (e: any) => {
-    e.preventDefault();
-    if (email === "edu@200lab.io" && password === "edu@200lab") {
-      router.push("/");
-    } else {
-      alert("Thông tin đăng nhập không chính xác");
-    }
+  const onSubmit: SubmitHandler<TLoginAuth> = async (data) => {
+    console.log("🚀 ~ constonSubmit:SubmitHandler<TLoginAuth>= ~ data:", data);
   };
 
   return (
@@ -52,70 +100,53 @@ export default function LoginView() {
               Sign in to Bento
             </Typography>
           </div>
-          <form onSubmit={handleLogin}>
-            <div className="flex flex-col gap-[0.875rem] mb-[1.5rem]">
-              <Input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                icon={
-                  <object
-                    type="image/svg+xml"
-                    data="/svg/ic_reset_password.svg"
-                    className="absolute right-2 top-2 cursor-pointer"
-                  />
-                }
-              />
-            </div>
+          {/* react hooks form */}
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <div className="flex flex-col gap-[0.875rem] mb-[1.5rem]">
+                <EmailField />
+                <PasswordField />
+              </div>
 
-            <div className="flex flex-col gap-3">
-              <Button
-                type="submit"
-                className="w-full base px-[2rem] py-[0.875rem] text-secondary text-sm font-semibold opacity-100"
-                child={<Typography level="base2sm">Sign In</Typography>}
-                disabled={!isBtnEnable}
-              />
+              <div className="flex flex-col gap-3">
+                <Button
+                  type="submit"
+                  className="w-full base px-[2rem] py-[0.875rem] text-secondary text-sm font-semibold opacity-100"
+                  child={<Typography level="base2sm">Sign In</Typography>}
+                />
 
-              <Button
-                className="w-full px-[2rem] py-[0.875rem]"
-                child={
-                  <div className="flex items-center gap-3 justify-center">
-                    <Image
-                      src="/svg/ic_google.svg"
-                      alt="Google Logo"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5"
-                    />
-                    <Typography level="base2sm" className="text-secondary">
-                      Sign in with Google
+                <Button
+                  className="w-full px-[2rem] py-[0.875rem]"
+                  child={
+                    <div className="flex items-center gap-3 justify-center">
+                      <Image
+                        src="/svg/ic_google.svg"
+                        alt="Google Logo"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5"
+                      />
+                      <Typography level="base2sm" className="text-secondary">
+                        Sign in with Google
+                      </Typography>
+                    </div>
+                  }
+                />
+
+                <Typography
+                  level="captionr"
+                  className="opacity-80 flex items-center gap-2 text-secondary justify-center"
+                >
+                  Don&apos;t have an account?
+                  <Link href="/register" className="opacity-100 font-semibold">
+                    <Typography level="captionsm" className="opacity-100">
+                      Sign up, it&apos;s free!
                     </Typography>
-                  </div>
-                }
-              />
-
-              <Typography
-                level="captionr"
-                className="opacity-80 flex items-center gap-2 text-secondary justify-center"
-              >
-                Don&apos;t have an account?
-                <Link href="/register" className="opacity-100 font-semibold">
-                  <Typography level="captionsm" className="opacity-100">
-                    Sign up, it&apos;s free!
-                  </Typography>
-                </Link>
-              </Typography>
-            </div>
-          </form>
+                  </Link>
+                </Typography>
+              </div>
+            </form>
+          </FormProvider>
         </div>
         <div className="hidden md:flex md:flex-col md:gap-6 md:justify-center md:items-center">
           <Typography className="text-tertiary opacity-80 ">
