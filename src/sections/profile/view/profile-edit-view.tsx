@@ -11,8 +11,8 @@ export default function ProfileEditView() {
 
   return (
     <section className="w-full relative flex flex-col items-center pb-[5rem] bg-surface min-h-svh md:pb-0 lg:mr-[21.25rem] xl:mr-[30rem] transition-all duration-[0.5s]">
-      <ProfileHeader />
-      {user && <Cover user={user} />}
+      <ProfileHeader isEdit />
+      {user && <Cover user={user} isEdit />}
       {user && <UserEditForm userInfo={user} />}
     </section>
   );
