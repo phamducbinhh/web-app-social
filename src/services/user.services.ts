@@ -16,6 +16,19 @@ class UserApiRequest {
       config: { method: METHOD_TYPE.GET, token },
     });
   }
+
+  public updateUserProfile({
+    body,
+    token,
+  }: {
+    body: any;
+    token?: string;
+  }): Promise<any> {
+    return apiBaseServiceInstance.Http({
+      path: APP_API_ENDPOINT.USER.UPDATE_PROFILE,
+      config: { method: METHOD_TYPE.PATCH, body, token },
+    });
+  }
 }
 
 const userApiRequest = new UserApiRequest();

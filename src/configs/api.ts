@@ -13,5 +13,6 @@ export const APP_API_ENDPOINT = Object.freeze({
     RESET_PASSWORD: `${VERSION_PREFIX}/user/reset-password`,
     GET_PROFILE: ({ user_id }: { user_id: string | number }) =>
       `${VERSION_PREFIX}/user/profile/${user_id}`,
+    UPDATE_PROFILE: `${VERSION_PREFIX}/user/profile`,
   },
 });

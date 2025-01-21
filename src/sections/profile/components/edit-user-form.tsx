@@ -8,22 +8,25 @@ import {
 } from "@/components/icons";
 import { Typography } from "@/components/typography";
 import { IUserProfile } from "@/interfaces/user";
-import { useState } from "react";
+import { useUserFormStore } from "@/stores/user";
+import { useEffect } from "react";
 
 export default function UserEditForm({ userInfo }: { userInfo: IUserProfile }) {
-  const [formData, setFormData] = useState({
-    first_name: userInfo.first_name,
-    last_name: userInfo.last_name,
-    username: userInfo.username,
-    bio: userInfo.bio,
-    website_url: userInfo.website_url || "",
-  });
+  const { formData, setFormData } = useUserFormStore();
+
+  useEffect(() => {
+    setFormData({
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
+      username: userInfo.username,
+      bio: userInfo.bio,
+      website_url: userInfo.website_url || "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo]);
 
   const handleChange = (name: keyof IUserProfile, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -85,7 +88,7 @@ export default function UserEditForm({ userInfo }: { userInfo: IUserProfile }) {
           <li className="p-4 flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <Typography
               level="base2r"
-              className="text-secondary opacity-80 flex items-center gap-3 min-w-[10rem]"
+              className="text-secondary flex items-center gap-3 min-w-[10rem] opacity-50"
             >
               <TagIcon />
               Username
@@ -94,9 +97,9 @@ export default function UserEditForm({ userInfo }: { userInfo: IUserProfile }) {
               <input
                 type="text"
                 name="username"
-                className="grow text-primary text-sm opacity-80"
+                className="grow text-primary text-sm opacity-50 cursor-not-allowed"
                 value={formData.username}
-                onChange={(e) => handleChange("username", e.target.value)}
+                readOnly
               />
               <OutlineCheckIcon />
             </div>

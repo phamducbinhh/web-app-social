@@ -3,19 +3,42 @@
 import { CircleButton } from "@/components/button";
 import { ArrowBackIcon, CameraIcon, MoreIcon } from "@/components/icons";
 import { Typography } from "@/components/typography";
+import { HttpStatusCode } from "@/configs/HttpStatusCode";
+import { useVerifiedUserValidator } from "@/queries/useAuth";
+import { updateUserProfile } from "@/server/mutation/user.mutate";
+import { useUserFormStore } from "@/stores/user";
 import { useRouter } from "next-nprogress-bar";
+import { toast } from "react-toastify";
 
 //-------------------------------------------------------------------------
 
 interface HeadProps {
   isEdit?: boolean; // Nếu là trang chỉnh sửa thì isEdit = true
-  onSave?: () => void; // Hàm xử lý khi nhấn nút Save
 }
 
-export default function Head({ isEdit = false, onSave }: HeadProps) {
+export default function Head({ isEdit = false }: HeadProps) {
+  const { formData } = useUserFormStore();
+  const { refetch } = useVerifiedUserValidator();
+
   const router = useRouter();
   const handleBack = () => {
     router.back();
+  };
+
+  const handleSubmit = async () => {
+    console.log(formData);
+    try {
+      const response = await updateUserProfile({ body: formData });
+      if (response.code === HttpStatusCode.SUCCESS) {
+        refetch();
+        toast.success("Update profile successfully");
+        router.back();
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -37,7 +60,7 @@ export default function Head({ isEdit = false, onSave }: HeadProps) {
         <>
           <CircleButton className="p-2" children={<CameraIcon />} />
           <CircleButton
-            onClick={onSave}
+            onClick={handleSubmit}
             children={
               <Typography level="base2sm" className="text-secondary">
                 Save
