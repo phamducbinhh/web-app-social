@@ -26,7 +26,6 @@ export default function Head({ isEdit = false }: HeadProps) {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     try {
       const response = await updateUserProfile({ body: formData });
       if (response.code === HttpStatusCode.SUCCESS) {
