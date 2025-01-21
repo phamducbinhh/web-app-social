@@ -11,7 +11,7 @@ export const APP_API_ENDPOINT = Object.freeze({
     VERIFY_EMAIL: `${VERSION_PREFIX}/user/verify-email`,
     FORGOT_PASSWORD: `${VERSION_PREFIX}/user/forgot-password`,
     RESET_PASSWORD: `${VERSION_PREFIX}/user/reset-password`,
-    GET_PROFILE: ({ name }: { name: string }) =>
-      `${VERSION_PREFIX}/user/profile/${name}`,
+    GET_PROFILE: ({ user_id }: { user_id: string | number }) =>
+      `${VERSION_PREFIX}/user/profile/${user_id}`,
   },
 });

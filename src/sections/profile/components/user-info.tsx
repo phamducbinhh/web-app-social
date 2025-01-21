@@ -38,15 +38,17 @@ export default function UserInfo({ user }: UserInfoProps) {
           className="p-2.5"
         />
 
-        <CircleButton children={<EditIcon />} className="p-2.5 md:hidden" />
-        <CircleButton
-          children={
-            <Typography level="base2sm" className="text-secondary">
-              Edit profile
-            </Typography>
-          }
-          className="hidden md:block px-5 py-2"
-        />
+        <Link href={`/profile/${user.id}/edit`}>
+          <CircleButton children={<EditIcon />} className="p-2.5 md:hidden" />
+          <CircleButton
+            children={
+              <Typography level="base2sm" className="text-secondary">
+                Edit profile
+              </Typography>
+            }
+            className="hidden md:block px-5 py-2"
+          />
+        </Link>
       </div>
       <Typography level="body2r" className="text-tertiary opacity-80">
         {user.bio}

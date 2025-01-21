@@ -6,16 +6,20 @@ import { ArrowBackIcon } from "@/components/icons";
 import ProfileCard from "@/components/profile-card/profile-card";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
 import { Typography } from "@/components/typography";
+import { useRouter } from "next-nprogress-bar";
 import React from "react";
 
 //--------------------------------------------------------------------------
 
 export default function FollowersView() {
+  const router = useRouter();
   const [activeType, setActiveType] = React.useState<"follower" | "following">(
     "follower"
   );
 
-  const handleBack = () => {};
+  const handleBack = () => {
+    router.back();
+  };
 
   const handleToggle = (key: string) => {
     if (key === "1") {
