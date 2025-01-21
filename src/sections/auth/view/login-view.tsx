@@ -5,11 +5,16 @@ import { AvatarGroup } from "@/components/avatar";
 import { Button, CircleButton } from "@/components/button";
 import { FormField } from "@/components/formField";
 import { Typography } from "@/components/typography";
+import { HttpStatusCode } from "@/configs/HttpStatusCode";
+import { useLoginMutation } from "@/queries/useAuth";
 import styled from "@/styles/auth.module.css";
 import { TLoginAuth } from "@/types/auth";
+import { setFormErrors } from "@/utils/setErrorForm";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next-nprogress-bar";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -24,6 +29,10 @@ const schema = yup.object({
 });
 
 export default function LoginView() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const loginMutation = useLoginMutation();
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -33,8 +42,26 @@ export default function LoginView() {
     },
   });
 
+  const { setError } = methods;
+
   const onSubmit: SubmitHandler<TLoginAuth> = async (data) => {
-    console.log("🚀 ~ constonSubmit:SubmitHandler<TLoginAuth>= ~ data:", data);
+    setIsLoading(true);
+    try {
+      const response = await loginMutation.mutateAsync(data);
+      const { status, data: responseData } = response;
+      if (status === HttpStatusCode.SUCCESS) {
+        router.push("/");
+        return;
+      }
+
+      if (responseData?.errors) {
+        setFormErrors<TLoginAuth>(responseData.errors, setError);
+      }
+    } catch (error: any) {
+      setError("root", { message: error.message });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -70,8 +97,15 @@ export default function LoginView() {
               <div className="flex flex-col gap-3">
                 <Button
                   type="submit"
-                  className="w-full base px-[2rem] py-[0.875rem] text-secondary text-sm font-semibold opacity-100"
-                  child={<Typography level="base2sm">Sign In</Typography>}
+                  className={`w-full base px-[2rem] py-[0.875rem] ${
+                    isLoading ? "bg-neutral2-5 opacity-50" : "opacity-100"
+                  }`}
+                  disabled={isLoading}
+                  child={
+                    <Typography level="base2sm" className="text-tertiary">
+                      {isLoading ? "Loading..." : "Login"}
+                    </Typography>
+                  }
                 />
 
                 <Button

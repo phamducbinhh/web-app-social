@@ -55,6 +55,10 @@ export class ApiClient {
       headers.Authorization = `Bearer ${token}`;
     }
 
+    if (config.body && config.method !== METHOD_TYPE.GET) {
+      headers["Content-Type"] = "application/json";
+    }
+
     return headers;
   }
 

@@ -4,7 +4,7 @@ export const APP_API_ENDPOINT = Object.freeze({
   AUTH: {
     LOGIN: `${VERSION_PREFIX}/auth/login`,
     REGISTER: `${VERSION_PREFIX}/auth/register`,
-    VERIFIED_USER_VALIDATOR: `${VERSION_PREFIX}/auth/user/profile`,
+    VERIFIED_USER_VALIDATOR: `${VERSION_PREFIX}/user/profile`,
     LOG_OUT: `${VERSION_PREFIX}/auth/logout`,
   },
   USER: {

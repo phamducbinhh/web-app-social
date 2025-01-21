@@ -7,8 +7,11 @@ import ExpandControl from "@/components/icons/expand-control";
 import Leave from "@/components/icons/leave";
 import SettingSlider from "@/components/icons/setting-slider";
 import { Typography } from "@/components/typography";
+import { HttpStatusCode } from "@/configs/HttpStatusCode";
 import useBreakPoint from "@/hooks/use-breakpoint";
+import { useLogoutMutation } from "@/queries/useAuth";
 import { paths } from "@/routers/path";
+import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { NAVIGATION_ITEMS } from "./navigation-items";
@@ -28,6 +31,8 @@ const Sidebar: React.FC = () => {
   const [isMoreOptions, setIsMoreOptions] = useState(false);
   const { breakpoint } = useBreakPoint();
   const [isCreatePost, setIsCreatePost] = useState(false);
+  const logoutMutation = useLogoutMutation();
+  const router = useRouter();
 
   const navItems = NAVIGATION_ITEMS;
 
@@ -41,7 +46,7 @@ const Sidebar: React.FC = () => {
         setIsExpanded(!isExpanded);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [breakpoint]);
 
   useEffect(() => {
@@ -68,6 +73,17 @@ const Sidebar: React.FC = () => {
 
   const handleCreatePost = () => {
     setIsCreatePost(!isCreatePost);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutMutation.mutateAsync();
+      if (response?.status === HttpStatusCode.SUCCESS) {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -171,11 +187,12 @@ const Sidebar: React.FC = () => {
                       <SettingSlider />
                     </div>
                   </Link>
-                  <Link href="/login">
-                    <div className="h-12 z-50 flex p-2 items-center rounded-b-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16">
-                      <Leave />
-                    </div>
-                  </Link>
+                  <div
+                    className="h-12 z-50 flex p-2 items-center rounded-b-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16"
+                    onClick={handleLogout}
+                  >
+                    <Leave />
+                  </div>
                 </div>
               </>
             )}

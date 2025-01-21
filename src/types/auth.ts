@@ -10,11 +10,12 @@ export type TLoginAuth = {
   password: string;
 };
 export type TRegisterAuth = {
-  name: string;
+  username: string;
   email: string;
   password: string;
-  passwordConfirm?: string;
-  date_of_birth: string;
+  confirm_password?: string;
+  first_name: string;
+  last_name: string;
 };
 
 export type TUser = {
