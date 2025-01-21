@@ -8,6 +8,7 @@ import {
   TagButton,
 } from "@/components/button";
 import { Typography } from "@/components/typography";
+import { useVerifiedUserValidator } from "@/queries/useAuth";
 import { useState } from "react";
 
 //-------------------------------------------------------------------------
@@ -17,6 +18,7 @@ interface PostContentProps {
 
 export default function ComposerInput({ usedBy }: PostContentProps) {
   const [isInputFocused, setInputFocused] = useState(false);
+  const { data: profile, isPending } = useVerifiedUserValidator();
 
   return (
     <div
@@ -28,10 +30,12 @@ export default function ComposerInput({ usedBy }: PostContentProps) {
         id="reply-content"
         className="w-full flex justify-between items-center gap-3 grow"
       >
-        <Avatar
-          avtClassName="rounded-full size-[44px]"
-          src="https://i.pinimg.com/originals/d3/6f/ef/d36fef4f4885354afcfd3753dee95741.jpg"
-        />
+        {!isPending && profile && (
+          <Avatar
+            avtClassName="rounded-full size-[44px]"
+            src={profile?.avatar}
+          />
+        )}
 
         <input
           type="text"

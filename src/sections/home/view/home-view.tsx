@@ -5,11 +5,13 @@ import { Avatar } from "@/components/avatar";
 import { CircleButton } from "@/components/button";
 import { ComposerInput } from "@/components/composer-input";
 import { AddIcon, Logo, SearchIcon } from "@/components/icons";
+import NewPostModal from "@/components/new-post";
 import { Post } from "@/components/post";
 import { SearchBar } from "@/components/search";
 import MobileSidebarTrigger from "@/components/sidebar-trigger/mobile-sidebar-trigger";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
 import type { Post as typePost } from "@/interfaces/post";
+import { useVerifiedUserValidator } from "@/queries/useAuth";
 import React from "react";
 
 //--------------------------------------------------------------------------------------------------------
@@ -17,6 +19,7 @@ import React from "react";
 export default function HomeView() {
   const [isPostShow, setIsPostShow] = React.useState(false);
   const [isSidebarShow, setIsSidebarShow] = React.useState(false);
+  const { data: profile } = useVerifiedUserValidator();
 
   React.useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -89,7 +92,9 @@ export default function HomeView() {
           <Post key={post.id} post={post} />
         ))}
       </div>
-      {/* {isPostShow && <CreatPost onBack={toggleCreatePost} />} */}
+      {isPostShow && (
+        <NewPostModal onBack={toggleCreatePost} profile={profile} />
+      )}
     </>
   );
 }

@@ -6,6 +6,7 @@ import { AddIcon, Logo, MoreIcon } from "@/components/icons";
 import ExpandControl from "@/components/icons/expand-control";
 import Leave from "@/components/icons/leave";
 import SettingSlider from "@/components/icons/setting-slider";
+import NewPostModal from "@/components/new-post";
 import { Typography } from "@/components/typography";
 import { HttpStatusCode } from "@/configs/HttpStatusCode";
 import useBreakPoint from "@/hooks/use-breakpoint";
@@ -226,7 +227,9 @@ const Sidebar: React.FC = () => {
           )}
         </section>
       </aside>
-      {/* {isCreatePost && <CreatPost onBack={handleCreatePost} />} */}
+      {isCreatePost && (
+        <NewPostModal onBack={handleCreatePost} profile={data} />
+      )}
     </>
   );
 };
