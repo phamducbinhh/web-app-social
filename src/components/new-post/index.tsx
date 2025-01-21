@@ -11,14 +11,13 @@ import {
 import { ArrowBackIcon } from "@/components/icons";
 import CloseIcon from "@/components/icons/close";
 import { Typography } from "@/components/typography";
+import { IUserSimple } from "@/interfaces/user";
 
 //-------------------------------------------------------------------------
 
 interface ICreatePostProps {
   onBack: () => void;
-  profile: {
-    avatar: string;
-  };
+  profile: IUserSimple;
 }
 
 export default function NewPostModal({ onBack, profile }: ICreatePostProps) {

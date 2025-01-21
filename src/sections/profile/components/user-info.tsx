@@ -1,5 +1,4 @@
 /* eslint-disable react/no-children-prop */
-import { IUser } from "@/_mocks/_user";
 import { CircleButton } from "@/components/button";
 import {
   CommentIcon,
@@ -9,12 +8,13 @@ import {
   ShareIcon,
 } from "@/components/icons";
 import { Typography } from "@/components/typography";
+import { IUserProfile } from "@/interfaces/user";
 import Link from "next/link";
 
 //-------------------------------------------------------------------------
 
 interface UserInfoProps {
-  user: IUser;
+  user: IUserProfile;
 }
 
 export default function UserInfo({ user }: UserInfoProps) {
@@ -26,7 +26,7 @@ export default function UserInfo({ user }: UserInfoProps) {
       >
         <div className="grow opacity-80">
           <Typography level="title" className="text-primary">
-            {user.name}
+            {user.first_name} {user.last_name}
           </Typography>
           <Typography level="base2r" className="text-tertiary">
             @{user.username}
@@ -61,7 +61,7 @@ export default function UserInfo({ user }: UserInfoProps) {
               level="base2r"
               className="text-primary flex items-center gap-2"
             >
-              {user.posts}
+              {user.post_count || 0}
               <Typography level="base2r" className="text-tertiary">
                 posts
               </Typography>
@@ -74,7 +74,7 @@ export default function UserInfo({ user }: UserInfoProps) {
               level="base2r"
               className="text-primary flex items-center gap-2"
             >
-              {user.followers}
+              {user.follow_count || 0}
               <Link href={`/profile/${user.id}/followers`}>
                 <Typography level="base2r" className="text-tertiary">
                   followers
@@ -85,12 +85,12 @@ export default function UserInfo({ user }: UserInfoProps) {
         </div>
         <div className="flex items-center gap-2 text-sm base opacity-80 cursor-pointer rounded-button px-3 py-2 hover:bg-neutral2-5">
           <LinkIcon />
-          <a href={user.portfolio}>
+          <a href={user.website_url}>
             <Typography
               level="base2r"
               className="text-primary flex items-center gap-2"
             >
-              {user.portfolio}
+              {user.website_url}
             </Typography>
           </a>
         </div>

@@ -1,18 +1,19 @@
+import { IUserSimple } from "@/interfaces/user";
 import Image from "next/image";
 
-export default function Cover() {
+export default function Cover({ user }: { user: IUserSimple }) {
   return (
     <section className="w-full">
       <div className="relative">
         <Image
-          src="https://i.pinimg.com/originals/d3/6f/ef/d36fef4f4885354afcfd3753dee95741.jpg"
+          src={user.cover}
           width={1280}
           height={180}
           className="max-h-[11.25rem] w-full object-cover"
           alt="Banner"
         />
         <Image
-          src="https://i.pinimg.com/originals/a4/72/10/a47210899e2f804d4f4aead44adaefe0.jpg"
+          src={user.avatar}
           alt="avatar"
           width={80}
           height={80}
