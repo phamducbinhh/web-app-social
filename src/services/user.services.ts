@@ -8,7 +8,7 @@ class UserApiRequest {
     user_id,
     token,
   }: {
-    user_id: string;
+    user_id: string | number;
     token?: string;
   }): Promise<any> {
     return apiBaseServiceInstance.Http({

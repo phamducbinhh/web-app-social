@@ -1,20 +1,19 @@
 import { _posts as fakePosts } from "@/_mocks/_posts";
-import { _user as fakeUsers } from "@/_mocks/_user";
 import { Newfeed } from "@/components/newfeed";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
+import { IUserProfile, IUserSimple } from "@/interfaces/user";
 import { Cover, ProfileHeader, UserInfo } from "../components";
 
 interface ProfileUserViewProps {
-  userId: string;
+  userInfo: IUserSimple | IUserProfile;
 }
 
-export default function ProfileUserView({ userId }: ProfileUserViewProps) {
-  const user = fakeUsers.find((user) => user.id === userId);
+export default function ProfileUserView({ userInfo }: ProfileUserViewProps) {
   return (
     <section className="w-full relative flex flex-col items-center bg-surface min-h-svh pb-[5rem] md:pb-0 lg:mr-[21.25rem] xl:mr-[30rem] transition-all duration-[0.5s]">
       <ProfileHeader />
-      <Cover />
-      {user ? <UserInfo user={user} /> : <div>User not found</div>}
+      {userInfo && <Cover user={userInfo as IUserSimple} />}
+      {userInfo && <UserInfo user={userInfo as IUserProfile} />}
       <section className="w-full p-3 flex flex-col gap-3">
         <ToggleGroup
           items={[
