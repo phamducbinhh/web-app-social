@@ -15,4 +15,7 @@ export const APP_API_ENDPOINT = Object.freeze({
       `${VERSION_PREFIX}/user/profile/${user_id}`,
     UPDATE_PROFILE: `${VERSION_PREFIX}/user/profile`,
   },
+  MEDIA: {
+    UPLOAD_MEDIA: `${VERSION_PREFIX}/media/upload`,
+  },
 });

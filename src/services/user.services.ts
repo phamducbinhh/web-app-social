@@ -29,6 +29,19 @@ class UserApiRequest {
       config: { method: METHOD_TYPE.PATCH, body, token },
     });
   }
+
+  public uploadMedia({
+    body,
+    token,
+  }: {
+    body: any;
+    token?: string;
+  }): Promise<any> {
+    return apiBaseServiceInstance.Http({
+      path: APP_API_ENDPOINT.MEDIA.UPLOAD_MEDIA,
+      config: { method: METHOD_TYPE.POST, body, token },
+    });
+  }
 }
 
 const userApiRequest = new UserApiRequest();

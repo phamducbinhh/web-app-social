@@ -5,10 +5,10 @@ import { ArrowBackIcon, CameraIcon, MoreIcon } from "@/components/icons";
 import { Typography } from "@/components/typography";
 import { HttpStatusCode } from "@/configs/HttpStatusCode";
 import { typePicture } from "@/constants/enum";
-import { useVerifiedUserValidator } from "@/queries/useAuth";
 import { updateUserProfile } from "@/server/mutation/user.mutate";
 import { useGlobalStore } from "@/stores/state";
 import { useUserFormStore } from "@/stores/user";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next-nprogress-bar";
 import { toast } from "react-toastify";
 
@@ -20,7 +20,7 @@ interface HeadProps {
 
 export default function Head({ isEdit = false }: HeadProps) {
   const { formData } = useUserFormStore();
-  const { refetch } = useVerifiedUserValidator();
+  const queryClient = useQueryClient();
   const { setIsOpenModal, setIsTypePicture } = useGlobalStore();
 
   const router = useRouter();
@@ -32,7 +32,10 @@ export default function Head({ isEdit = false }: HeadProps) {
     try {
       const response = await updateUserProfile({ body: formData });
       if (response.code === HttpStatusCode.SUCCESS) {
-        refetch();
+        queryClient.invalidateQueries({
+          queryKey: ["VerifiedUserValidator"],
+          exact: true,
+        });
         toast.success("Update profile successfully");
         router.back();
       } else {

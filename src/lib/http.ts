@@ -55,7 +55,12 @@ export class ApiClient {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    if (config.body && config.method !== METHOD_TYPE.GET) {
+    // Không thêm Content-Type nếu body là FormData
+    if (
+      config.body &&
+      !(config.body instanceof FormData) &&
+      config.method !== METHOD_TYPE.GET
+    ) {
       headers["Content-Type"] = "application/json";
     }
 
@@ -97,7 +102,11 @@ export class ApiClient {
       headers,
       credentials: "include",
       body:
-        method !== METHOD_TYPE.GET && body ? JSON.stringify(body) : undefined,
+        method !== METHOD_TYPE.GET && body
+          ? body instanceof FormData
+            ? body // Nếu là FormData, truyền trực tiếp
+            : JSON.stringify(body) // Nếu không, chuyển thành JSON
+          : undefined,
       ...restConfig,
     };
 

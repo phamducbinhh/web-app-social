@@ -17,7 +17,7 @@ export default function ProfileEditView() {
       <ProfileHeader isEdit />
       {user && <Cover user={user} isEdit />}
       {user && <UserEditForm userInfo={user} />}
-      {isOpenModal && <AvatarUpdateDialog />}
+      {isOpenModal && <AvatarUpdateDialog userInfo={user} />}
     </section>
   );
 }

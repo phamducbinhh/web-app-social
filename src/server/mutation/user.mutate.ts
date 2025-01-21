@@ -18,3 +18,17 @@ export async function updateUserProfile({ body }: { body: any }) {
     };
   }
 }
+
+export async function uploadMedia({ body }: { body: any }) {
+  try {
+    const token = (await getTokenCookies()) as string;
+    return await userApiRequest.uploadMedia({ body, token });
+  } catch (error) {
+    return {
+      code: HttpStatusCode.INTERNAL_SERVER_ERROR,
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+      data: null,
+    };
+  }
+}
