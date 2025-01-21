@@ -1,11 +1,14 @@
 "use client";
+import AvatarUpdateDialog from "@/components/avatar/avatar-profile-dialog";
 import { SplashScreen } from "@/components/loading-screen";
 import { useVerifiedUserValidator } from "@/queries/useAuth";
+import { useGlobalStore } from "@/stores/state";
 import { Cover, ProfileHeader } from "../components";
 import UserEditForm from "../components/edit-user-form";
 
 export default function ProfileEditView() {
   const { data: user, isPending } = useVerifiedUserValidator();
+  const { isOpenModal } = useGlobalStore();
 
   if (isPending) return <SplashScreen />;
 
@@ -14,6 +17,7 @@ export default function ProfileEditView() {
       <ProfileHeader isEdit />
       {user && <Cover user={user} isEdit />}
       {user && <UserEditForm userInfo={user} />}
+      {isOpenModal && <AvatarUpdateDialog />}
     </section>
   );
 }
