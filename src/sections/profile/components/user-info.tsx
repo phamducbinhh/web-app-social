@@ -1,5 +1,6 @@
 /* eslint-disable react/no-children-prop */
-import { CircleButton } from "@/components/button";
+"use client";
+import { Button, CircleButton } from "@/components/button";
 import {
   CommentIcon,
   EditIcon,
@@ -9,6 +10,7 @@ import {
 } from "@/components/icons";
 import { Typography } from "@/components/typography";
 import { IUserProfile } from "@/interfaces/user";
+import { useVerifiedUserValidator } from "@/queries/useAuth";
 import Link from "next/link";
 
 //-------------------------------------------------------------------------
@@ -18,6 +20,8 @@ interface UserInfoProps {
 }
 
 export default function UserInfo({ user }: UserInfoProps) {
+  const { data: account } = useVerifiedUserValidator();
+
   return (
     <section className="w-full flex flex-col gap-[1.25rem] p-6 mt-6 ">
       <div
@@ -29,7 +33,8 @@ export default function UserInfo({ user }: UserInfoProps) {
             {user.first_name} {user.last_name}
           </Typography>
           <Typography level="base2r" className="text-tertiary">
-            @{user.username}
+            {(account?.id === user?.id && `@${account.username}`) ||
+              `${user.first_name} ${user.last_name}`}
           </Typography>
         </div>
 
@@ -38,17 +43,30 @@ export default function UserInfo({ user }: UserInfoProps) {
           className="p-2.5"
         />
 
-        <Link href={`/profile/${user.id}/edit`}>
-          <CircleButton children={<EditIcon />} className="p-2.5 md:hidden" />
-          <CircleButton
-            children={
-              <Typography level="base2sm" className="text-secondary">
-                Edit profile
+        {account?.id !== user?.id && (
+          <Button
+            child={
+              <Typography level="base2r" className="text-tertiary">
+                Follow
               </Typography>
             }
-            className="hidden md:block px-5 py-2"
+            className="p-2.5"
           />
-        </Link>
+        )}
+
+        {account?.id === user.id && (
+          <Link href={`/profile/${user.id}/edit`}>
+            <CircleButton children={<EditIcon />} className="p-2.5 md:hidden" />
+            <CircleButton
+              children={
+                <Typography level="base2sm" className="text-secondary">
+                  Edit profile
+                </Typography>
+              }
+              className="hidden md:block px-5 py-2"
+            />
+          </Link>
+        )}
       </div>
       <Typography level="body2r" className="text-tertiary opacity-80">
         {user.bio}
