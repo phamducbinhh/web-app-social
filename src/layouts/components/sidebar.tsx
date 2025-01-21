@@ -30,6 +30,19 @@ const Sidebar: React.FC = () => {
 
   const router = useRouter();
 
+  const currentUser: {
+    fullname: string;
+    nickname: string;
+    avatar: string;
+    isActive: boolean;
+  } = !isPending &&
+    data && {
+      fullname: `${data?.first_name} ${data?.last_name}`,
+      nickname: data?.username,
+      avatar: data?.avatar,
+      isActive: data?.status === "active",
+    };
+
   const navItems = NAVIGATION_ITEMS;
 
   useEffect(() => {
@@ -140,7 +153,7 @@ const Sidebar: React.FC = () => {
           id="account"
           className="p-3 flex flex-col gap-2 items-center justify-center"
         >
-          {!isPending && data && (
+          {currentUser && (
             <div
               onClick={toggleMoreOptions}
               className={`relative z-20 flex p-1.5 gap-3 w-full items-center justify-center backdrop-blur-16  hover:bg-neutral1-5 active:bg-neutral4-30 ${
@@ -148,9 +161,9 @@ const Sidebar: React.FC = () => {
               }`}
             >
               <Avatar
-                src={data?.avatar}
-                alt={data?.username}
-                isOnline={data?.status === "active"}
+                src={currentUser?.avatar}
+                alt={currentUser?.nickname}
+                isOnline={currentUser?.isActive}
                 avtClassName="h-8 w-8"
               />
 
@@ -161,14 +174,14 @@ const Sidebar: React.FC = () => {
                       level="base2sm"
                       className="text-secondary opacity-80 select-none"
                     >
-                      {data?.username}
+                      {currentUser.fullname}
                     </Typography>
                     <br />
                     <Typography
                       level="captionr"
                       className="text-tertiary opacity-45 select-none"
                     >
-                      {data?.email}
+                      @{currentUser.nickname}
                     </Typography>
                   </span>
                   <span className="p-1">
