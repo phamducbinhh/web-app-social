@@ -9,7 +9,7 @@ import SettingSlider from "@/components/icons/setting-slider";
 import { Typography } from "@/components/typography";
 import { HttpStatusCode } from "@/configs/HttpStatusCode";
 import useBreakPoint from "@/hooks/use-breakpoint";
-import { useLogoutMutation } from "@/queries/useAuth";
+import { useLogoutMutation, useVerifiedUserValidator } from "@/queries/useAuth";
 import { paths } from "@/routers/path";
 import { useRouter } from "next-nprogress-bar";
 import Link from "next/link";
@@ -19,19 +19,14 @@ import NavigationBar from "./navigationbar";
 
 //-------------------------------------------------------------------------
 
-const USER = {
-  name: "Kohaku",
-  email: "@kohaku",
-  avatar: "/img/avatar-7.png",
-  status: "online",
-};
-
 const Sidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMoreOptions, setIsMoreOptions] = useState(false);
   const { breakpoint } = useBreakPoint();
   const [isCreatePost, setIsCreatePost] = useState(false);
   const logoutMutation = useLogoutMutation();
+  const { data, isPending } = useVerifiedUserValidator();
+
   const router = useRouter();
 
   const navItems = NAVIGATION_ITEMS;
@@ -144,59 +139,61 @@ const Sidebar: React.FC = () => {
           id="account"
           className="p-3 flex flex-col gap-2 items-center justify-center"
         >
-          <div
-            onClick={toggleMoreOptions}
-            className={`relative z-20 flex p-1.5 gap-3 w-full items-center justify-center backdrop-blur-16  hover:bg-neutral1-5 active:bg-neutral4-30 ${
-              isExpanded ? "rounded-xl" : "rounded-full "
-            }`}
-          >
-            <Avatar
-              src={USER.avatar}
-              alt={USER.name}
-              isOnline={USER.status === "online"}
-              avtClassName="h-8 w-8"
-            />
+          {!isPending && data && (
+            <div
+              onClick={toggleMoreOptions}
+              className={`relative z-20 flex p-1.5 gap-3 w-full items-center justify-center backdrop-blur-16  hover:bg-neutral1-5 active:bg-neutral4-30 ${
+                isExpanded ? "rounded-xl" : "rounded-full "
+              }`}
+            >
+              <Avatar
+                src={data?.avatar}
+                alt={data?.username}
+                isOnline={data?.status === "active"}
+                avtClassName="h-8 w-8"
+              />
 
-            {isExpanded && (
-              <div className="flex flex-1 items-center">
-                <span className="flex-grow">
-                  <Typography
-                    level="base2sm"
-                    className="text-secondary opacity-80 select-none"
-                  >
-                    {USER.name}
-                  </Typography>
-                  <br />
-                  <Typography
-                    level="captionr"
-                    className="text-tertiary opacity-45 select-none"
-                  >
-                    {USER.email}
-                  </Typography>
-                </span>
-                <span className="p-1">
-                  <MoreIcon />
-                </span>
-              </div>
-            )}
-            {isMoreOptions && (
-              <>
-                <div className="absolute -top-[96px] right-0 z-50 mr-0.5 bg-neutral2-5 rounded-[32px] shadow-dropup border border-neutral1-20">
-                  <Link href={`${paths.settings}?view=account-settings`}>
-                    <div className="h-12 z-50 flex p-2 items-center rounded-t-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16">
-                      <SettingSlider />
-                    </div>
-                  </Link>
-                  <div
-                    className="h-12 z-50 flex p-2 items-center rounded-b-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16"
-                    onClick={handleLogout}
-                  >
-                    <Leave />
-                  </div>
+              {isExpanded && (
+                <div className="flex flex-1 items-center">
+                  <span className="flex-grow">
+                    <Typography
+                      level="base2sm"
+                      className="text-secondary opacity-80 select-none"
+                    >
+                      {data?.username}
+                    </Typography>
+                    <br />
+                    <Typography
+                      level="captionr"
+                      className="text-tertiary opacity-45 select-none"
+                    >
+                      {data?.email}
+                    </Typography>
+                  </span>
+                  <span className="p-1">
+                    <MoreIcon />
+                  </span>
                 </div>
-              </>
-            )}
-          </div>
+              )}
+              {isMoreOptions && (
+                <>
+                  <div className="absolute -top-[96px] right-0 z-50 mr-0.5 bg-neutral2-5 rounded-[32px] shadow-dropup border border-neutral1-20">
+                    <Link href={`${paths.settings}?view=account-settings`}>
+                      <div className="h-12 z-50 flex p-2 items-center rounded-t-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16">
+                        <SettingSlider />
+                      </div>
+                    </Link>
+                    <div
+                      className="h-12 z-50 flex p-2 items-center rounded-b-[32px] bg-neutral1-0 hover:bg-neutral1-5 backdrop-blur-16"
+                      onClick={handleLogout}
+                    >
+                      <Leave />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
           <CircleButton
             className={`${isExpanded && "px-6 py-3 w-full"}`}
             onClick={() => {

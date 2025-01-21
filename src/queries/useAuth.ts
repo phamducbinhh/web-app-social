@@ -11,9 +11,10 @@ export const useVerifiedUserValidator = () => {
     queryKey: ["VerifiedUserValidator"],
     queryFn: async () => {
       const response = await authApiRequest.VerifiedUserValidator();
-      if (response.status === "error") throw new Error(response.data.message);
-      setIsLoggedIn(true);
-      return response;
+      if (response.code === HttpStatusCode.SUCCESS) {
+        setIsLoggedIn(true);
+        return response.metadata;
+      }
     },
     retry: false,
   });
