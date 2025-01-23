@@ -1,7 +1,5 @@
 "use client";
-import { _posts as fakePosts } from "@/_mocks/_posts";
 import { SplashScreen } from "@/components/loading-screen";
-import { Newfeed } from "@/components/newfeed";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
 import { useVerifiedUserValidator } from "@/queries/useAuth";
 import { Cover, ProfileHeader, UserInfo } from "../components";
@@ -27,7 +25,7 @@ export default function ProfileView() {
           ]}
         />
 
-        <Newfeed contentType="post" list={fakePosts} />
+        {/* <Newfeed contentType="post" list={fakePosts} /> */}
       </section>
     </section>
   );
