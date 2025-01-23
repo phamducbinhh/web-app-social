@@ -21,7 +21,7 @@ import NavigationBar from "./navigationbar";
 //-------------------------------------------------------------------------
 
 const Sidebar: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const [isMoreOptions, setIsMoreOptions] = useState(false);
   const { breakpoint } = useBreakPoint();
   const [isCreatePost, setIsCreatePost] = useState(false);

@@ -18,4 +18,24 @@ export const APP_API_ENDPOINT = Object.freeze({
   MEDIA: {
     UPLOAD_MEDIA: `${VERSION_PREFIX}/media/upload`,
   },
+  POST: {
+    CREATE_POST: `${VERSION_PREFIX}/posts`,
+    GET_POST_BY_ID: ({ post_id }: { post_id: string | number }) =>
+      `${VERSION_PREFIX}/posts/${post_id}`,
+    GET_ALL_POSTS: ({
+      limit,
+      page,
+      type,
+    }: {
+      limit?: number;
+      page?: number;
+      type?: string;
+    }) => `${VERSION_PREFIX}/posts?limit=${limit}&page=${page}&type=${type}`,
+    GET_ALL_POSTS_BY_USER_ID: ({ user_id }: { user_id: string | number }) =>
+      `${VERSION_PREFIX}/posts/user/${user_id}`,
+    UPDATE_POST: ({ post_id }: { post_id: string | number }) =>
+      `${VERSION_PREFIX}/posts/${post_id}`,
+    DELETE_POST: ({ post_id }: { post_id: string | number }) =>
+      `${VERSION_PREFIX}/post/${post_id}`,
+  },
 });

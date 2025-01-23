@@ -1,6 +1,5 @@
 /* eslint-disable react/no-children-prop */
 "use client";
-import { _posts as fakePosts } from "@/_mocks/_posts";
 import { Avatar } from "@/components/avatar";
 import { CircleButton } from "@/components/button";
 import { ComposerInput } from "@/components/composer-input";
@@ -10,13 +9,13 @@ import { Post } from "@/components/post";
 import { SearchBar } from "@/components/search";
 import MobileSidebarTrigger from "@/components/sidebar-trigger/mobile-sidebar-trigger";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
-import type { Post as typePost } from "@/interfaces/post";
+import { IPost } from "@/interfaces/post";
 import { useVerifiedUserValidator } from "@/queries/useAuth";
 import React from "react";
 
 //--------------------------------------------------------------------------------------------------------
 
-export default function HomeView() {
+export default function HomeView({ posts }: { posts: IPost[] }) {
   const [isPostShow, setIsPostShow] = React.useState(false);
   const [isSidebarShow, setIsSidebarShow] = React.useState(false);
   const { data: profile } = useVerifiedUserValidator();
@@ -42,6 +41,8 @@ export default function HomeView() {
   const toggleSidebar = () => {
     setIsSidebarShow(!isSidebarShow);
   };
+
+  if (!posts) return <></>;
 
   return (
     <>
@@ -88,7 +89,7 @@ export default function HomeView() {
 
         <ComposerInput usedBy="post" />
 
-        {fakePosts.map((post: typePost) => (
+        {posts.map((post: IPost) => (
           <Post key={post.id} post={post} />
         ))}
       </div>

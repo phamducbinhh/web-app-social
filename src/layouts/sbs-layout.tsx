@@ -1,7 +1,7 @@
 "use client";
 
 import useBreakPoint from "@/hooks/use-breakpoint";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type SBSLProps = {
   sideComponent: React.ReactNode;
@@ -10,11 +10,17 @@ type SBSLProps = {
 
 const SidebySideLayout = ({ sideComponent, children }: SBSLProps) => {
   const { breakpoint } = useBreakPoint();
-  const isLargeScreen =
-    breakpoint === "lg" ||
-    breakpoint === "xl" ||
-    breakpoint === "2xl" ||
-    breakpoint === "3xl";
+  const [isLargeScreen, setIsLargeScreen] = useState(true); // Mặc định hiển thị sidebar trên SSR
+
+  useEffect(() => {
+    // Cập nhật trạng thái khi client xác định breakpoint
+    setIsLargeScreen(
+      breakpoint === "lg" ||
+        breakpoint === "xl" ||
+        breakpoint === "2xl" ||
+        breakpoint === "3xl"
+    );
+  }, [breakpoint]);
 
   return (
     <div className="h-full flex">
