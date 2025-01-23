@@ -35,7 +35,11 @@ class PostApiRequest {
   }): Promise<any> {
     return apiBaseServiceInstance.Http({
       path: APP_API_ENDPOINT.POST.GET_POST_BY_ID({ post_id }),
-      config: { method: METHOD_TYPE.GET, token },
+      config: {
+        method: METHOD_TYPE.GET,
+        token,
+        next: { tags: ["post-details"] }, // Tag cho post
+      },
     });
   }
 }
