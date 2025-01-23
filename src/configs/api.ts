@@ -38,4 +38,13 @@ export const APP_API_ENDPOINT = Object.freeze({
     DELETE_POST: ({ post_id }: { post_id: string | number }) =>
       `${VERSION_PREFIX}/post/${post_id}`,
   },
+  COMMENTS: {
+    CREATE_COMMENT: `${VERSION_PREFIX}/comments`,
+    GET_ALL_COMMENT_BY_POST_ID: ({ post_id }: { post_id: string | number }) =>
+      `${VERSION_PREFIX}/comments/${post_id}`,
+    UPDATE_COMMENT: ({ comment_id }: { comment_id: string | number }) =>
+      `${VERSION_PREFIX}/comments/${comment_id}`,
+    DELETE_COMMENT: ({ comment_id }: { comment_id: string | number }) =>
+      `${VERSION_PREFIX}/comments/${comment_id}`,
+  },
 });

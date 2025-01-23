@@ -1,41 +1,34 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
   BookmarkIcon,
   CommentIcon,
   HeartIcon,
   MoreIcon,
-  RepostIcon,
   ShareIcon,
 } from "@/components/icons";
 import { ReactItem } from "@/components/post/react-item";
 import { Typography } from "@/components/typography";
+import { formatLastChangedTime } from "@/helpers";
+import { IComment } from "@/interfaces/comment";
 import Image from "next/image";
 import React from "react";
-import LineComment from "./line-comment";
+import SubComments from "./sub-comments";
 
-//--------------------------------------------------------------------------------------------------------
-
-export default function Comment({ comment, isLast }: any) {
+export default function Comment({ comment }: { comment: IComment }) {
   const [isLiked, setIsLiked] = React.useState(false);
-  const [isRecommented, setIsRecommented] = React.useState(false);
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
   };
 
-  const handleRecommentClick = () => {
-    setIsRecommented(!isRecommented);
-  };
-
   return (
-    <div className="w-full p-3 flex flex-col gap-3 relative">
+    <div className="w-full p-3 flex flex-col gap-3 relative bg-neutral2-2 rounded-[1.25rem]">
       <div className="flex justify-start items-start gap-5">
         <Image
           width={44}
           height={44}
           src={
-            comment.user?.avatar ||
+            comment.users?.avatar ||
             "https://i.pinimg.com/originals/d3/6f/ef/d36fef4f4885354afcfd3753dee95741.jpg"
           }
           alt="avatar-user"
@@ -47,60 +40,41 @@ export default function Comment({ comment, isLast }: any) {
               level="base2m"
               className="text-primary justify-self-start opacity-80 mr-4"
             >
-              {comment.user?.name}
+              {comment.users?.firstName} {comment.users?.lastName}
             </Typography>
             <Typography
               level="captionr"
               className="text-tertiary justify-self-start grow opacity-45"
             >
-              {comment.user?.time}
+              {formatLastChangedTime(comment.created_at)}
             </Typography>
 
             <MoreIcon />
           </div>
           <Typography level="body2r" className="text-secondary opacity-80">
-            {comment.content?.text}
+            {comment.content}
           </Typography>
-
-          {comment.content?.image && (
-            <Image
-              width={1280}
-              height={720}
-              src={comment.content.image}
-              alt="comment-image"
-              loading="lazy"
-              className="max-h-[20rem] md:max-h-[22.5rem] w-full md:rounded-[1.5rem] object-cover"
-            />
-          )}
         </div>
       </div>
 
-      {/* <LineComment /> */}
-      {!isLast && <LineComment />}
-
       <div className="flex justify-end items-center md:justify-start md:pl-[48px]">
         <ReactItem
-          value={comment.interactions?.likes || 0}
+          value={comment.liked_count || 0}
           icon={<HeartIcon isActive={isLiked} />}
           onClick={handleLikeClick}
         />
 
-        <ReactItem
-          onClick={handleRecommentClick}
-          value={comment.interactions?.recomments || 0}
-          icon={<RepostIcon isActive={isRecommented} />}
-        />
-
-        <ReactItem
-          value={comment.interactions?.comments || 0}
-          icon={<CommentIcon />}
-        />
+        <ReactItem value={comment.reply_count || 0} icon={<CommentIcon />} />
 
         <div className="flex items-center md:grow justify-end gap-4">
           <BookmarkIcon height={24} width={24} />
           <ShareIcon height={24} width={24} />
         </div>
       </div>
+
+      {comment.children && comment.children.length > 0 && (
+        <SubComments data={comment.children as IComment[]} />
+      )}
     </div>
   );
 }

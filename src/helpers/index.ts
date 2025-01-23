@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const isObjectEmpty = (obj: Record<string, any>) => {
   return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
 };
@@ -6,7 +7,8 @@ export const checkJSONchecker = (str: string) => {
   try {
     JSON.parse(str);
     return true;
-  } catch (e) {
+  } catch (e: unknown) {
+    console.log(e);
     return false;
   }
 };
