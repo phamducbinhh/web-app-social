@@ -14,7 +14,13 @@ class CommentsApiRequest {
   }): Promise<any> {
     return apiBaseServiceInstance.Http({
       path: APP_API_ENDPOINT.COMMENTS.GET_ALL_COMMENT_BY_POST_ID({ post_id }),
-      config: { method: METHOD_TYPE.GET, token },
+      config: {
+        method: METHOD_TYPE.GET,
+        token,
+        next: {
+          tags: [`comments-${post_id}`],
+        },
+      },
     });
   }
 

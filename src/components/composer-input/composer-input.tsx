@@ -46,13 +46,15 @@ export default function ComposerInput({ usedBy, post_id }: PostContentProps) {
         const response = await createComment({ body: commentData });
         if (response.code === HttpStatusCode.CREATED) {
           toast.success(response.message);
-          setIsValue("");
+        } else {
+          toast.error(response.message);
         }
       }
     } catch (error) {
       console.log(error);
     } finally {
       setIsSubmitting(false);
+      setIsValue("");
     }
   };
 
@@ -82,6 +84,7 @@ export default function ComposerInput({ usedBy, post_id }: PostContentProps) {
           id="input-reply"
           className="!bg-transparent text-tertiary placeholder:text-tertiary grow opacity-50 focus:outline-none focus:bg-transparent focus:opacity-100"
           onFocus={() => setInputFocused(true)}
+          value={isValue}
           onChange={handleChange}
         />
       </div>
