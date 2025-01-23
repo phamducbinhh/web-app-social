@@ -7,9 +7,11 @@ import { Comment as CommentComponent, SubHeader } from "../components";
 
 export default function PostDetailView({
   post,
+  post_id,
   comments,
 }: {
   post: IPost;
+  post_id: string | number;
   comments: IComment[];
 }) {
   return (
@@ -25,7 +27,7 @@ export default function PostDetailView({
               ))}
           </div>
 
-          <ComposerInput usedBy="reply" />
+          <ComposerInput usedBy="reply" post_id={post_id} />
         </section>
       </div>
     </SubHeader>

@@ -24,5 +24,11 @@ export default async function PostDetail(props: { params: Params }) {
     fetchComments(id),
   ]);
 
-  return <PostDetailView post={post} comments={comments as IComment[]} />;
+  return (
+    <PostDetailView
+      post={post}
+      comments={comments as IComment[]}
+      post_id={id}
+    />
+  );
 }

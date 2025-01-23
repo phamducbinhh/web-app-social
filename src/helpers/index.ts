@@ -116,7 +116,7 @@ export const formatLastChangedTime = (date: string): string => {
   } else if (interval === 1) {
     return "1 phút trước";
   }
-  return Math.floor(seconds) + " giây trước";
+  return "vừa xong";
 };
 
 export const formatDateString = (isoString: string) => {

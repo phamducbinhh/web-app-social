@@ -17,6 +17,19 @@ class CommentsApiRequest {
       config: { method: METHOD_TYPE.GET, token },
     });
   }
+
+  public createComment({
+    body,
+    token,
+  }: {
+    body: any;
+    token?: string;
+  }): Promise<any> {
+    return apiBaseServiceInstance.Http({
+      path: APP_API_ENDPOINT.COMMENTS.CREATE_COMMENT,
+      config: { method: METHOD_TYPE.POST, body, token },
+    });
+  }
 }
 
 const commentsApiRequest = new CommentsApiRequest();
