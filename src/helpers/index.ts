@@ -85,9 +85,7 @@ export const formatTime = (dateTime: string) => {
 
 export const formatLastChangedTime = (date: string): string => {
   const seconds: number = Math.floor(
-    (new Date().getTime() -
-      new Date(Date.parse(date)).getTime()) /
-      1000
+    (new Date().getTime() - new Date(Date.parse(date)).getTime()) / 1000
   );
   let interval: number = Math.floor(seconds / 31536000);
 
@@ -116,7 +114,7 @@ export const formatLastChangedTime = (date: string): string => {
   } else if (interval === 1) {
     return "1 phút trước";
   }
-  return Math.floor(seconds) + " giây trước";
+  return "Vừa mới xong";
 };
 
 export const formatDateString = (isoString: string) => {
