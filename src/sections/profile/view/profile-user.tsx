@@ -1,5 +1,3 @@
-import { _posts as fakePosts } from "@/_mocks/_posts";
-import { Newfeed } from "@/components/newfeed";
 import ToggleGroup from "@/components/toggle-group/toggle-group";
 import { IUserProfile, IUserSimple } from "@/interfaces/user";
 import { Cover, ProfileHeader, UserInfo } from "../components";
@@ -23,7 +21,7 @@ export default function ProfileUserView({ userInfo }: ProfileUserViewProps) {
           ]}
         />
 
-        <Newfeed contentType="post" list={fakePosts} />
+        {/* <Newfeed contentType="post" list={fakePosts} /> */}
       </section>
     </section>
   );

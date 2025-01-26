@@ -1,3 +1,4 @@
+"use client";
 import { CameraIcon } from "@/components/icons";
 import { typePicture } from "@/constants/enum";
 import { IUserSimple } from "@/interfaces/user";

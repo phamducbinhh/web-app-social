@@ -31,6 +31,7 @@ export default function Head({ isEdit = false }: HeadProps) {
   const handleSubmit = async () => {
     try {
       const response = await updateUserProfile({ body: formData });
+      console.log(response);
       if (response.code === HttpStatusCode.SUCCESS) {
         queryClient.invalidateQueries({
           queryKey: ["VerifiedUserValidator"],

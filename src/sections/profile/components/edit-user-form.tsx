@@ -117,7 +117,8 @@ export default function UserEditForm({ userInfo }: { userInfo: IUserProfile }) {
             <textarea
               name="bio"
               className="grow min-h-[8.75rem] max-h-[8.75rem] bg-transparent focus:outline-none text-primary text-sm opacity-80"
-              value={formData.bio}
+              defaultValue={formData.bio}
+              placeholder="Enter your bio"
               onChange={(e) => handleChange("bio", e.target.value)}
             />
           </li>
@@ -136,6 +137,7 @@ export default function UserEditForm({ userInfo }: { userInfo: IUserProfile }) {
                 type="text"
                 name="link"
                 className="grow text-primary text-sm opacity-80"
+                placeholder="https://"
                 value={formData.website_url}
                 onChange={(e) => handleChange("website_url", e.target.value)}
               />
