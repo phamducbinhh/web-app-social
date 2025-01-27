@@ -114,7 +114,7 @@ export const formatLastChangedTime = (date: string): string => {
   } else if (interval === 1) {
     return "1 phút trước";
   }
-  return "Vừa mới xong";
+  return "just now";
 };
 
 export const formatDateString = (isoString: string) => {
