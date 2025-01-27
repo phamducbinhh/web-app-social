@@ -22,14 +22,17 @@ export default function Cover({
     <section className="w-full">
       <div className="relative">
         <Image
-          src={user.cover}
+          src={
+            user.cover ||
+            "https://statics.oeg.vn/storage/FUS_APP_IMAGES/gc_pro_banner_fu.webp"
+          }
           width={1280}
           height={180}
           className="max-h-[11.25rem] w-full object-cover"
           alt="Banner"
         />
         <Image
-          src={user.avatar}
+          src={user.avatar || "/img/avatar-1.png"}
           alt="avatar"
           width={80}
           height={80}

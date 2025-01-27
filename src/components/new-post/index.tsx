@@ -48,7 +48,7 @@ export default function NewPostModal({ onBack, profile }: ICreatePostProps) {
 
         <div className="w-full max-h-screen mx-auto flex justify-center items-center md:h-full md:flex-col md:items-start md:justify-between md:static md:rounded-[2rem] ">
           <div className="w-full h-fit flex justify-between items-center gap-3 p-3 rounded-[1.25rem]">
-            <Avatar src={profile?.avatar} />
+            <Avatar src={profile?.avatar || "/img/avatar-1.png"} />
             <input
               type="text"
               placeholder="Start a post..."

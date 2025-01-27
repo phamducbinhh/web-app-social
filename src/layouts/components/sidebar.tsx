@@ -161,7 +161,7 @@ const Sidebar: React.FC = () => {
               }`}
             >
               <Avatar
-                src={currentUser?.avatar}
+                src={currentUser?.avatar || "/img/avatar-1.png"}
                 alt={currentUser?.nickname}
                 isOnline={currentUser?.isActive}
                 avtClassName="h-8 w-8"

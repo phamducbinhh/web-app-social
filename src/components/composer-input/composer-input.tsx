@@ -72,7 +72,7 @@ export default function ComposerInput({ usedBy, post_id }: PostContentProps) {
         {!isPending && profile && (
           <Avatar
             avtClassName="rounded-full size-[44px]"
-            src={profile?.avatar}
+            src={profile?.avatar || "/img/avatar-1.png"}
           />
         )}
 
